@@ -29,18 +29,18 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     // Step 1: Parse Data/Cast as numbers
     // ==================================
     stateData.forEach(function(data) {
-        data.healthcare = +data.healthcare;
         data.poverty = +data.poverty;
+        data.healthcare = +data.healthcare;
     });
 
     // Step 2: Create scale functions
     // ==================================
     var xLinearScale = d3.scaleLinear()
-        .domain([d3.min(stateData, d => d.healthcare), d3.max(stateData, d => d.healthcare)])
+        .domain([d3.min(stateData, d => d.poverty)*.9, d3.max(stateData, d => d.poverty)*1.1])
         .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.poverty)])
+        .domain([d3.min(stateData, d => d.healthcare*.8), d3.max(stateData, d => d.healthcare)*1.2])
         .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -65,9 +65,9 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
         .append("circle")
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "15")
+        .attr("r", "12")
         .attr("fill", "lightblue")
-        .attr("opacity", ".95");
+        .attr("opacity", "1");
 
     // Step 5B: Create labels for the circles
     chartGroup.append("g").selectAll("text")
@@ -79,8 +79,9 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
         .attr("y", d => yLinearScale(d.healthcare))
         .attr("dy", ".4em")
         .attr("text-anchor", "middle")
-        .attr("stroke", "white")
-        .attr("fill", "white");
+        .attr("fill", "white")
+        .style("font-size", "10px")
+        .style("font-weight", "bold");
 
     // Step 6: Initialize tool tip
     // ==================================
