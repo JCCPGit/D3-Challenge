@@ -5,7 +5,7 @@ var svgHeight = 500;
 var margin = {
     top: 20,
     right: 40,
-    bottom: 60,
+    bottom: 80,
     left: 100
 };
 
@@ -117,7 +117,7 @@ function updateToolTip(selectedXAxis, selectedYAxis, statesGroup) {
     // Insert toolTip into the HTML
     var toolTip = d3.tip()
     .attr("class", "tooltip")
-    .offset([80, -60])
+    .offset([-10, 0])
     .html(function(d) {
       return (`<h6>${d.state}</h6>${xLabel} ${d[selectedXAxis]}
       <br>${yLabel} ${d[selectedYAxis]}`);
@@ -196,7 +196,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
         .style("font-size", "10px")
         .style("font-weight", "bold");
 
-    // Step 5C: Create lbael groups for x and y axis
+    // Step 5C: Create label groups for x and y axis
     // X Axis label group
     var xLabelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width/2}, ${height + 20})`);
@@ -206,21 +206,24 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
             .attr("y", 20)
             .attr("value", "poverty")
             .classed("active", true)
-            .text("In Poverty (%)");
+            .text("In Poverty (%)")
+            .style("font-size", "10px");
 
         var ageLabel = xLabelsGroup.append("text")
             .attr("x", 0)
             .attr("y", 40)
             .attr("value", "age")
             .classed("inactive", true)
-            .text("Age (Median)");
+            .text("Age (Median)")
+            .style("font-size", "10px");
 
         var incomeLabel = xLabelsGroup.append("text")
             .attr("x", 0)
             .attr("y", 60)
             .attr("value", "income")
             .classed("inactive", true)
-            .text("Household Income (Median)");
+            .text("Household Income (Median)")
+            .style("font-size", "10px");
 
     // Y Axis label group
     var yLabelsGroup = chartGroup.append("g")
@@ -232,7 +235,8 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
             .attr("dy", "1em")
             .attr("value", "healthcare")
             .classed("active", true)
-            .text("Lacks Healthcare (%)");
+            .text("Lacks Healthcare (%)")
+            .style("font-size", "10px");
 
         var smokesLabel = yLabelsGroup.append("text")
             .attr("transform", "rotate(-90)")
@@ -241,7 +245,8 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
             .attr("dy", "1em")
             .attr("value", "smokes")
             .classed("inactive", true)
-            .text("Smokes (%)");
+            .text("Smokes (%)")
+            .style("font-size", "10px");
 
         var obesityLabel = yLabelsGroup.append("text")
             .attr("transform", "rotate(-90)")
@@ -250,7 +255,8 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
             .attr("dy", "1em")
             .attr("value", "obesity")
             .classed("inactive", true)
-            .text("Obese (%)");
+            .text("Obese (%)")
+            .style("font-size", "10px");
 
     // Step 6: Initialize tool tip
     // ==================================
